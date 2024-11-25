@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp5gbmhqsxtym"]
+[gd_scene load_steps=12 format=3 uid="uid://bp5gbmhqsxtym"]
 
 [ext_resource type="PackedScene" uid="uid://dcki8becg4n1p" path="res://player.tscn" id="1_2x623"]
 [ext_resource type="PackedScene" uid="uid://cishuiua46jp" path="res://assets/house.blend" id="1_8oygb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2o7qr"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhitd"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
 albedo_color = Color(0.572549, 0.407843, 0.160784, 1)
@@ -12,8 +18,9 @@ size = Vector3(5, 0.1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6cmt"]
 albedo_color = Color(0, 0.588235, 0, 1)
 
-[sub_resource type="PrismMesh" id="PrismMesh_eaiug"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="BoxMesh" id="BoxMesh_tiu8w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lpecp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i5avv"]
 size = Vector3(25, 1, 25)
@@ -23,11 +30,18 @@ size = Vector3(25, 1, 25)
 
 [node name="Main" type="Node"]
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.978148, 0.207912, 0, -0.207912, -0.978148, 0, 0, 0)
-
 [node name="Player" parent="." instance=ExtResource("1_2x623")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.74704, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
+speed = 250
+
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(-4.30478e-08, -0.98482, 0.173579, 7.5874e-09, 0.173579, 0.98482, -1, 4.37113e-08, 2.93099e-14, 2, 6.5, 0)
+current = true
+
+[node name="Dot" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.2682)
+mesh = SubResource("BoxMesh_2o7qr")
+surface_material_override/0 = SubResource("StandardMaterial3D_uhitd")
 
 [node name="Patch" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
@@ -39,21 +53,34 @@ mesh = SubResource("BoxMesh_mr27g")
 
 [node name="Cabbage" type="Node3D" parent="Patch"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Patch/Cabbage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+[node name="Label" type="Label3D" parent="Patch/Cabbage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "0% Hydrated"
+
+[node name="Body" type="StaticBody3D" parent="Patch/Cabbage" groups=["crop"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Patch/Cabbage/Body"]
 material_override = SubResource("StandardMaterial3D_n6cmt")
-mesh = SubResource("PrismMesh_eaiug")
+mesh = SubResource("BoxMesh_tiu8w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Patch/Cabbage/Body"]
+shape = SubResource("BoxShape3D_lpecp")
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_i5avv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_8oth1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.30478e-08, -0.98482, 0.173579, 7.5874e-09, 0.173579, 0.98482, -1, 4.37114e-08, 1.77636e-15, 5.6179, 12.3794, 0)
-
 [node name="House" parent="." instance=ExtResource("1_8oygb")]
+
+[node name="Sun" type="Node3D" parent="."]
+transform = Transform3D(0.267238, 0.928584, 0.257519, 0, -0.267238, 0.96363, 0.96363, -0.257519, -0.0714163, 0, 0, 0)
+
+[node name="Sun With Shadow" type="DirectionalLight3D" parent="Sun"]
+shadow_enabled = true
