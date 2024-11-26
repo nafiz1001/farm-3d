@@ -14,12 +14,12 @@ func _input(event):
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if click_result:
 		click.emit(click_result)
 		click_result = null
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if click_position != noclick_position:
 		var ray_start = self.project_ray_origin(click_position)
 		var ray_dir = self.project_ray_normal(click_position)

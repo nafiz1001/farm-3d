@@ -1,25 +1,34 @@
 extends CharacterBody3D
 
-@export var speed = 100
+@export var speed = 1
+
+var autopilot_target: Node3D = null
+var velocity_direction: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	pass
+	var x_input = Input.get_axis("forward", "backward")
+	var z_input = Input.get_axis("right", "left")
 
-func _physics_process(delta: float) -> void:
-	var target_velocity = Vector3(
-		Input.get_axis("forward", "backward"),
-		0,
-		Input.get_axis("right", "left")
-	)
-	if target_velocity.length_squared() > 0:
-		target_velocity = target_velocity.normalized()
-		self.velocity = target_velocity * speed * delta
-		self.horizontal_look_at(self.position + Vector3(target_velocity.x, 0, target_velocity.z))
+	if x_input != 0 or z_input != 0:
+		autopilot_target = null
+		velocity_direction = Vector3(x_input, 0, z_input).normalized()
+		self.horizontal_look_at(self.position + velocity_direction)
+	elif autopilot_target:
+		var displacement = autopilot_target.global_position - self.position
+		displacement.y = 0
+		if displacement.length() > 1:
+			velocity_direction = displacement.normalized()
+			self.horizontal_look_at(autopilot_target.global_position)
+		else:
+			autopilot_target = null
 	else:
-		self.velocity = Vector3.ZERO
+		velocity_direction = Vector3.ZERO
+
+func _physics_process(_delta: float) -> void:
+	self.velocity = velocity_direction * speed
 	move_and_slide()
 
 func _on_camera_click(result: Dictionary) -> void:
@@ -29,6 +38,7 @@ func _on_camera_click(result: Dictionary) -> void:
 		print("%s!" % node.name)
 		var pos = node.global_position
 		self.horizontal_look_at(pos)
+		autopilot_target = node
 
 func horizontal_look_at(target: Vector3):
 	$Pivot.look_at(target, self.up_direction, true)
