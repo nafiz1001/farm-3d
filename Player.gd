@@ -58,10 +58,10 @@ func autopilot_process():
 
 func hydrate_on(crop):
 	self.hydrating_target = crop
-	self.hydrating_target.hydrate = true
+	self.hydrating_target.hydrate_start()
 func hydrate_off():
 	if self.hydrating_target:
-		self.hydrating_target.hydrate = false
+		self.hydrating_target.hydrate_stop()
 		self.hydrating_target = null
 
 func horizontal_look_at(target: Vector3):

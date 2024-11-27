@@ -1,18 +1,17 @@
 extends Node3D
 
 var hydrate = false
+var hydration_amount: float = 0.0
 
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
 	if hydrate:
-		$CropHydration.hydration_amount += delta
+		self.hydration_amount += delta
+	$Label.text = "%.2f%% Hydrated" % self.hydration_amount
 
-func _on_interaction_area_body_entered(body: Node3D) -> void:
-	if body.get_parent().is_in_group("player"):
-		hydrate = true
-
-func _on_interaction_area_body_exited(body: Node3D) -> void:
-	if body.get_parent().is_in_group("player"):
-		hydrate = false 
+func hydrate_start():
+	self.hydrate = true
+func hydrate_stop():
+	self.hydrate = false
