@@ -2,19 +2,24 @@ extends Camera3D
 
 signal click(result: Dictionary)
 
+@export var camera_target: Node3D
+
 const noclick_position = Vector2(-1, -1)
 var click_position: Vector2 = noclick_position
 var click_result = null
 
-func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			click_position = event.position
-
 func _ready() -> void:
-	pass
+	self.global_transform = camera_target.global_transform
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				click_position = event.position
 
 func _process(_delta: float) -> void:
+	self.global_transform = camera_target.global_transform
+
 	if click_result:
 		click.emit(click_result)
 		click_result = null

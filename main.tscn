@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp5gbmhqsxtym"]
+[gd_scene load_steps=16 format=3 uid="uid://bp5gbmhqsxtym"]
 
 [ext_resource type="PackedScene" uid="uid://dcki8becg4n1p" path="res://player.tscn" id="1_2x623"]
 [ext_resource type="PackedScene" uid="uid://cishuiua46jp" path="res://assets/house.blend" id="1_8oygb"]
 [ext_resource type="Script" path="res://Camera.gd" id="2_mukn0"]
+[ext_resource type="Script" path="res://PlayerCamera.gd" id="2_vt7s2"]
+[ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://assets/cube_outline.blend" id="3_8e2x2"]
+[ext_resource type="Script" path="res://Crop.gd" id="4_corks"]
+[ext_resource type="Script" path="res://CropHydration.gd" id="4_iy3dy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
 albedo_color = Color(0.572549, 0.407843, 0.160784, 1)
@@ -17,6 +21,9 @@ albedo_color = Color(0, 0.588235, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lpecp"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0678"]
+size = Vector3(1.085, 1.085, 1.085)
+
 [sub_resource type="BoxMesh" id="BoxMesh_i5avv"]
 size = Vector3(25, 1, 25)
 
@@ -25,47 +32,69 @@ size = Vector3(25, 1, 25)
 
 [node name="Main" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource("1_2x623")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
-
-[node name="Camera" type="Camera3D" parent="Player"]
-transform = Transform3D(-4.30478e-08, -0.98482, 0.173579, 7.5874e-09, 0.173579, 0.98482, -1, 4.37113e-08, 2.93099e-14, 2, 6.5, 0)
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("camera_target")]
 current = true
 far = 100.0
 script = ExtResource("2_mukn0")
+camera_target = NodePath("../Player/CameraPivot/Camera")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_2x623")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
+speed = 2
+
+[node name="CameraPivot" type="Node3D" parent="Player"]
+
+[node name="Camera" type="Node3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23041, 4.80688, 0)
+script = ExtResource("2_vt7s2")
 
 [node name="Patch" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Patch"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Patch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 material_override = SubResource("StandardMaterial3D_nemoi")
 mesh = SubResource("BoxMesh_mr27g")
 
 [node name="Cabbage" type="Node3D" parent="Patch"]
-
-[node name="Label" type="Label3D" parent="Patch/Cabbage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-billboard = 1
-text = "0% Hydrated"
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.25, 0)
+script = ExtResource("4_corks")
 
 [node name="Body" type="StaticBody3D" parent="Patch/Cabbage" groups=["crop"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.25, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Patch/Cabbage/Body"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Patch/Cabbage/Body"]
 material_override = SubResource("StandardMaterial3D_n6cmt")
 mesh = SubResource("BoxMesh_tiu8w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Patch/Cabbage/Body"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Patch/Cabbage/Body"]
 shape = SubResource("BoxShape3D_lpecp")
+
+[node name="CropHydration" type="Node3D" parent="Patch/Cabbage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820838, 0)
+script = ExtResource("4_iy3dy")
+
+[node name="Label" type="Label3D" parent="Patch/Cabbage/CropHydration"]
+pixel_size = 0.01
+billboard = 1
+text = "0% Hydrated"
+
+[node name="InteractionArea" type="Area3D" parent="Patch/Cabbage" groups=["crop"]]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Patch/Cabbage/InteractionArea"]
+transform = Transform3D(1.81125, 0, 0, 0, 1.81125, 0, 0, 0, 1.81125, 0, 0, 0)
+shape = SubResource("BoxShape3D_g0678")
+
+[node name="Outline" parent="Patch/Cabbage/InteractionArea" instance=ExtResource("3_8e2x2")]
+transform = Transform3D(0.905625, 0, 0, 0, 0.905625, 0, 0, 0, 0.905625, 0, 0, 0)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_i5avv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_8oth1")
 
 [node name="House" parent="." instance=ExtResource("1_8oygb")]
@@ -76,4 +105,6 @@ transform = Transform3D(0.267238, 0.928584, 0.257519, 0, -0.267238, 0.96363, 0.9
 [node name="Sun With Shadow" type="DirectionalLight3D" parent="Sun"]
 shadow_enabled = true
 
-[connection signal="click" from="Player/Camera" to="Player" method="_on_camera_click"]
+[connection signal="click" from="Camera" to="Player" method="_on_camera_click"]
+[connection signal="body_entered" from="Patch/Cabbage/InteractionArea" to="Patch/Cabbage" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="Patch/Cabbage/InteractionArea" to="Patch/Cabbage" method="_on_interaction_area_body_exited"]
