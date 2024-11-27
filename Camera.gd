@@ -9,7 +9,7 @@ var click_position: Vector2 = noclick_position
 var click_result = null
 
 func _ready() -> void:
-	self.global_transform = camera_target.global_transform
+	self.follow_camera_target()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -18,7 +18,7 @@ func _input(event):
 				click_position = event.position
 
 func _process(_delta: float) -> void:
-	self.global_transform = camera_target.global_transform
+	self.follow_camera_target()
 
 	if click_result:
 		click.emit(click_result)
@@ -35,3 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 		click_result = space_state.intersect_ray(query)
 		click_position = noclick_position
+
+func follow_camera_target():
+	if self.camera_target:
+		self.global_transform = self.camera_target.global_transform
