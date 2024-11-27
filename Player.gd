@@ -15,6 +15,7 @@ func _process(_delta: float) -> void:
 
 	if x_input != 0 or z_input != 0:
 		self.autopilot_off()
+		self.hydrate_off()
 		self.velocity_direction = Vector3(x_input, 0, z_input).normalized()
 		self.horizontal_look_at(self.position + self.velocity_direction)
 	elif self.autopilot_target:
@@ -36,13 +37,13 @@ func _on_interaction_area_area_entered(area: Area3D) -> void:
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO
 func _on_interaction_area_area_exited(area: Area3D) -> void:
-	if self.hydrating_target and area.get_parent() == self.hydrating_target:
-		self.hydrate_off()
+	pass
 
 func autopilot_on(target: Node3D):
 	self.autopilot_target = target
 	var crop_interaction_area: Area3D = self.autopilot_target.find_child("InteractionArea", false)
 	crop_interaction_area.set_visible(true)
+	self.autopilot_process()
 	if crop_interaction_area.overlaps_area($InteractionArea):
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
