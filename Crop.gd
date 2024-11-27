@@ -10,9 +10,9 @@ func _process(delta: float) -> void:
 		$CropHydration.hydration_amount += delta
 
 func _on_interaction_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.get_parent().is_in_group("player"):
 		hydrate = true
 
 func _on_interaction_area_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.get_parent().is_in_group("player"):
 		hydrate = false 

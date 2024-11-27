@@ -9,7 +9,7 @@ var hydration_amount: float:
 		$Label.text = "%.2f%% Hydrated" % amount
 
 func _ready() -> void:
-	pass
+	self.hydration_amount = 0
 
 func _process(delta: float) -> void:
 	pass
