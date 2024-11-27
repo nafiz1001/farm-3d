@@ -1,14 +1,13 @@
 extends Camera3D
 
-signal click(result: Dictionary)
-
-@export var camera_target: Node3D
+@export var camera_follow: Node3D
+@export var click_listener: Node3D
 
 const noclick_position := Vector2(-1, -1)
 var click_position: Vector2 = noclick_position
 
 func _ready() -> void:
-	self.follow_camera_target()
+	self.follow_camera()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -17,7 +16,7 @@ func _input(event):
 				click_position = event.position
 
 func _process(_delta: float) -> void:
-	self.follow_camera_target()
+	self.follow_camera()
 
 func _physics_process(_delta: float) -> void:
 	if click_position != noclick_position:
@@ -29,10 +28,10 @@ func _physics_process(_delta: float) -> void:
 		var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end)
 
 		var click_result := space_state.intersect_ray(query)
-		if click_result:
-			click.emit(click_result)
+		if click_listener:
+			click_listener.click(click_result)
 		click_position = noclick_position
 
-func follow_camera_target():
-	if self.camera_target:
-		self.global_transform = self.camera_target.global_transform
+func follow_camera():
+	if self.camera_follow:
+		self.global_transform = self.camera_follow.global_transform

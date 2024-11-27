@@ -27,11 +27,12 @@ size = Vector3(25, 1, 25)
 
 [node name="Main" type="Node"]
 
-[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("camera_target")]
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("camera_follow", "click_listener")]
 current = true
 far = 100.0
 script = ExtResource("2_mukn0")
-camera_target = NodePath("../Player/CameraPivot/Camera")
+camera_follow = NodePath("../Player/CameraPivot/Camera")
+click_listener = NodePath("../Player")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_2x623")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
@@ -89,5 +90,3 @@ transform = Transform3D(0.267238, 0.928584, 0.257519, 0, -0.267238, 0.96363, 0.9
 
 [node name="Sun With Shadow" type="DirectionalLight3D" parent="Sun"]
 shadow_enabled = true
-
-[connection signal="click" from="Camera" to="Player" method="_on_camera_click"]
