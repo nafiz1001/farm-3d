@@ -1,6 +1,6 @@
 extends Node3D
 
-var hydrate = false
+var hydrate: bool = false
 var hydration_amount: float = 0.0
 
 func _ready() -> void:

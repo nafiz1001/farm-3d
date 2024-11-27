@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-@export var speed = 1
+@export var speed: float = 1
 
-var velocity_direction: Vector3 = Vector3.ZERO
+var velocity_direction := Vector3.ZERO
 
 var autopilot_target: Node3D = null
 var hydrating_target: Node3D = null
@@ -10,8 +10,8 @@ var hydrating_target: Node3D = null
 func _ready() -> void:
 	pass
 func _process(_delta: float) -> void:
-	var x_input = Input.get_axis("forward", "backward")
-	var z_input = Input.get_axis("right", "left")
+	var x_input := Input.get_axis("forward", "backward")
+	var z_input := Input.get_axis("right", "left")
 
 	if x_input != 0 or z_input != 0:
 		self.autopilot_off()
@@ -52,7 +52,7 @@ func autopilot_off():
 		self.autopilot_target.find_child("InteractionArea", false).set_visible(false)
 		self.autopilot_target = null
 func autopilot_process():
-	var displacement = self.autopilot_target.global_position - self.global_position
+	var displacement := self.autopilot_target.global_position - self.global_position
 	displacement.y = 0
 	self.velocity_direction = displacement.normalized()
 	self.horizontal_look_at(self.position + displacement)
