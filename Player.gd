@@ -26,6 +26,7 @@ func _physics_process(_delta: float) -> void:
 	self.velocity = velocity_direction * speed
 	move_and_slide()
 
+
 func _on_interaction_area_area_entered(area: Area3D) -> void:
 	if self.autopilot_target and area.get_parent() == self.autopilot_target:
 		self.hydrate_on(self.autopilot_target)
@@ -34,11 +35,6 @@ func _on_interaction_area_area_entered(area: Area3D) -> void:
 func _on_interaction_area_area_exited(area: Area3D) -> void:
 	pass
 
-func click(result: Dictionary) -> void:
-	var node = result.collider.get_parent()
-	print("%s!" % node.name)
-	if node.is_in_group("crop"):
-		autopilot_on(node.get_parent())
 
 func autopilot_on(target: Node3D):
 	self.autopilot_target = target
@@ -59,13 +55,15 @@ func autopilot_process():
 	self.velocity_direction = displacement.normalized()
 	self.horizontal_look_at(self.position + displacement)
 
-func hydrate_on(crop):
-	self.hydrating_target = crop
+
+func hydrate_on(target):
+	self.hydrating_target = target
 	self.hydrating_target.hydrate_start()
 func hydrate_off():
 	if self.hydrating_target:
 		self.hydrating_target.hydrate_stop()
 		self.hydrating_target = null
+
 
 func horizontal_look_at(target: Vector3):
 	$Pivot.look_at(target, self.up_direction, true)

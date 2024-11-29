@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp5gbmhqsxtym"]
+[gd_scene load_steps=10 format=3 uid="uid://bp5gbmhqsxtym"]
 
 [ext_resource type="PackedScene" uid="uid://dcki8becg4n1p" path="res://player.tscn" id="1_2x623"]
 [ext_resource type="PackedScene" uid="uid://cishuiua46jp" path="res://assets/house.blend" id="1_8oygb"]
+[ext_resource type="Script" path="res://Main.gd" id="1_57p7q"]
 [ext_resource type="Script" path="res://Camera.gd" id="2_mukn0"]
 [ext_resource type="Script" path="res://PlayerCamera.gd" id="2_vt7s2"]
 [ext_resource type="PackedScene" uid="uid://4mliptchk632" path="res://patch.tscn" id="4_30gkc"]
@@ -13,14 +14,15 @@ size = Vector3(25, 1, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8oth1"]
 size = Vector3(25, 1, 25)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("player")]
+script = ExtResource("1_57p7q")
+player = NodePath("Player")
 
-[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("camera_follow", "click_listener")]
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("camera_follow")]
 current = true
 far = 100.0
 script = ExtResource("2_mukn0")
 camera_follow = NodePath("../Player/CameraPivot/Camera")
-click_listener = NodePath("../Player")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_2x623")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
@@ -52,3 +54,5 @@ transform = Transform3D(0.267238, 0.928584, 0.257519, 0, -0.267238, 0.96363, 0.9
 
 [node name="Sun With Shadow" type="DirectionalLight3D" parent="Sun"]
 shadow_enabled = true
+
+[connection signal="click" from="Camera" to="." method="_on_camera_click"]

@@ -1,7 +1,8 @@
 extends Camera3D
 
+signal click(result: Dictionary)
+
 @export var camera_follow: Node3D
-@export var click_listener: Node3D
 
 const noclick_position := Vector2(-1, -1)
 var click_position: Vector2 = noclick_position
@@ -28,8 +29,7 @@ func _physics_process(_delta: float) -> void:
 		var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end)
 
 		var click_result := space_state.intersect_ray(query)
-		if click_listener:
-			click_listener.click(click_result)
+		click.emit(click_result)
 		click_position = noclick_position
 
 func follow_camera():
