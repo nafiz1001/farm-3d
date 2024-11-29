@@ -36,16 +36,16 @@ func _on_interaction_area_area_exited(area: Area3D) -> void:
 
 func click(result: Dictionary) -> void:
 	var node = result.collider.get_parent()
+	print("%s!" % node.name)
 	if node.is_in_group("crop"):
-		print("%s!" % node.name)
-		autopilot_on(node)
+		autopilot_on(node.get_parent())
 
 func autopilot_on(target: Node3D):
 	self.autopilot_target = target
-	var crop_interaction_area: Area3D = self.autopilot_target.find_child("InteractionArea", false)
-	crop_interaction_area.set_visible(true)
+	var interaction_area: Area3D = self.autopilot_target.find_child("InteractionArea", false)
+	interaction_area.set_visible(true)
 	self.autopilot_process()
-	if crop_interaction_area.overlaps_area($InteractionArea):
+	if interaction_area.overlaps_area($InteractionArea):
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO

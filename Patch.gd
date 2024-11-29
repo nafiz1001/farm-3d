@@ -1,12 +1,19 @@
 extends Node3D
 
-@export var crop: PackedScene
+@export var crop_scene: PackedScene
+var crop_node: Node
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	crop_node = self.crop_scene.instantiate()
+	var crop_metadata := crop_node.find_child("CropMetadata", false)
+	crop_node.position = crop_metadata.position_offset
+	crop_node.scale = crop_metadata.scale
+	add_child(crop_node)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func hydrate_start():
+	crop_node.hydrate_start()
+func hydrate_stop():
+	crop_node.hydrate_stop()

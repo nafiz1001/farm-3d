@@ -16,12 +16,12 @@ height = 1.0
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_bgl5n")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_wr7p8")
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("CapsuleMesh_3jyug")
 skeleton = NodePath("../..")
 
@@ -30,7 +30,7 @@ transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0, 0.515)
 
 [node name="InteractionArea" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+[node name="CollisionShape" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("BoxShape3D_jk7k2")
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]

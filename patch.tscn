@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://4mliptchk632"]
+
+[ext_resource type="Script" path="res://Patch.gd" id="1_wvr4p"]
+[ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://assets/cube_outline.blend" id="2_kdbp1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
+albedo_color = Color(0.572549, 0.407843, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mr27g"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4r3e"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flbcm"]
+
+[node name="Patch" type="Node3D" groups=["patch"]]
+script = ExtResource("1_wvr4p")
+
+[node name="Soil" type="Node3D" parent="."]
+
+[node name="MeshInstance" type="MeshInstance3D" parent="Soil"]
+material_override = SubResource("StandardMaterial3D_nemoi")
+mesh = SubResource("BoxMesh_mr27g")
+skeleton = NodePath("../..")
+
+[node name="StaticBody" type="StaticBody3D" parent="Soil"]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Soil/StaticBody"]
+shape = SubResource("BoxShape3D_r4r3e")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+visible = false
+
+[node name="CollisionShape" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_flbcm")
+
+[node name="Outline" parent="InteractionArea" instance=ExtResource("2_kdbp1")]
+transform = Transform3D(0.455, 0, 0, 0, 0.455, 0, 0, 0, 0.455, 0, 0.455, 0)
