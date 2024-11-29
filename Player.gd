@@ -28,11 +28,11 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_interaction_area_area_entered(area: Area3D) -> void:
-	if self.autopilot_target and area.get_parent() == self.autopilot_target.get_soil():
+	if self.autopilot_target and area == self.autopilot_target.get_interaction_area():
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO
-func _on_interaction_area_area_exited(area: Area3D) -> void:
+func _on_interaction_area_area_exited(_area: Area3D) -> void:
 	pass
 
 

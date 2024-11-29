@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://4mliptchk632"]
+[gd_scene load_steps=6 format=3 uid="uid://4mliptchk632"]
 
 [ext_resource type="Script" path="res://Soil.gd" id="1_wvr4p"]
+[ext_resource type="PackedScene" uid="uid://bvybrbgi1ecx2" path="res://interaction_area.tscn" id="2_mi77b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
 albedo_color = Color(0.572549, 0.407843, 0.160784, 1)
@@ -24,3 +25,6 @@ collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
 shape = SubResource("BoxShape3D_r4r3e")
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_mi77b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
