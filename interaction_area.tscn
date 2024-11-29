@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvybrbgi1ecx2"]
+
+[ext_resource type="Script" path="res://InteractionArea.gd" id="1_3crli"]
+[ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://assets/cube_outline.blend" id="1_xwmgt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flbcm"]
+
+[node name="InteractionArea" type="Area3D"]
+script = ExtResource("1_3crli")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_flbcm")
+
+[node name="Outline" parent="." instance=ExtResource("1_xwmgt")]
+transform = Transform3D(0.455, 0, 0, 0, 0.455, 0, 0, 0, 0.455, 0, 0, 0)

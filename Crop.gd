@@ -14,9 +14,5 @@ func hydrate_process(delta: float):
 
 func get_soil() -> Node:
 	return get_parent()
-
-func set_interation_area_visible(visible: bool):
-	self.get_soil().find_child("InteractionArea").set_visible(visible)
-
-func interaction_area_overlap(area: Area3D) -> bool:
-	return self.get_soil().find_child("InteractionArea").overlaps_area(area)
+func get_interaction_area() -> Area3D:
+	return self.get_soil().find_child("InteractionArea")

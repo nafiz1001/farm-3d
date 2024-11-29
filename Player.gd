@@ -38,15 +38,16 @@ func _on_interaction_area_area_exited(area: Area3D) -> void:
 
 func autopilot_on(target: Crop):
 	self.autopilot_target = target
-	self.autopilot_target.set_interation_area_visible(true)
+	var interaction_area := target.get_interaction_area()
+	interaction_area.outline = true
 	self.autopilot_process()
-	if self.autopilot_target.interaction_area_overlap($InteractionArea):
+	if interaction_area.overlaps_area($InteractionArea):
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO
 func autopilot_off():
 	if self.autopilot_target:
-		self.autopilot_target.set_interation_area_visible(false)
+		self.autopilot_target.get_interaction_area().outline = false
 		self.autopilot_target = null
 func autopilot_process():
 	var displacement := self.autopilot_target.global_position - self.global_position
