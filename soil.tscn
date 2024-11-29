@@ -21,7 +21,7 @@ mesh = SubResource("BoxMesh_mr27g")
 skeleton = NodePath("../..")
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
-collision_layer = 0
+collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
 shape = SubResource("BoxShape3D_r4r3e")
