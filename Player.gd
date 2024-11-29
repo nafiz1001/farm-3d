@@ -1,11 +1,11 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 @export var speed: float = 1
 
 var velocity_direction := Vector3.ZERO
 
-var autopilot_target: Node3D = null
-var hydrating_target: Node3D = null
+var autopilot_target: Crop = null
+var hydrating_target: Crop = null
 
 func _ready() -> void:
 	pass
@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_interaction_area_area_entered(area: Area3D) -> void:
-	if self.autopilot_target and area.get_parent() == self.autopilot_target:
+	if self.autopilot_target and area.get_parent() == self.autopilot_target.get_soil():
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO
@@ -36,18 +36,17 @@ func _on_interaction_area_area_exited(area: Area3D) -> void:
 	pass
 
 
-func autopilot_on(target: Node3D):
+func autopilot_on(target: Crop):
 	self.autopilot_target = target
-	var interaction_area: Area3D = self.autopilot_target.find_child("InteractionArea", false)
-	interaction_area.set_visible(true)
+	self.autopilot_target.set_interation_area_visible(true)
 	self.autopilot_process()
-	if interaction_area.overlaps_area($InteractionArea):
+	if self.autopilot_target.interaction_area_overlap($InteractionArea):
 		self.hydrate_on(self.autopilot_target)
 		self.autopilot_off()
 		self.velocity_direction = Vector3.ZERO
 func autopilot_off():
 	if self.autopilot_target:
-		self.autopilot_target.find_child("InteractionArea", false).set_visible(false)
+		self.autopilot_target.set_interation_area_visible(false)
 		self.autopilot_target = null
 func autopilot_process():
 	var displacement := self.autopilot_target.global_position - self.global_position
@@ -56,12 +55,12 @@ func autopilot_process():
 	self.horizontal_look_at(self.position + displacement)
 
 
-func hydrate_on(target):
+func hydrate_on(target: Crop):
 	self.hydrating_target = target
-	self.hydrating_target.hydrate_start()
+	self.hydrating_target.get_soil().hydrate_start()
 func hydrate_off():
 	if self.hydrating_target:
-		self.hydrating_target.hydrate_stop()
+		self.hydrating_target.get_soil().hydrate_stop()
 		self.hydrating_target = null
 
 

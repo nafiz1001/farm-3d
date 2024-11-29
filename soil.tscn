@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://4mliptchk632"]
 
-[ext_resource type="Script" path="res://Patch.gd" id="1_wvr4p"]
+[ext_resource type="Script" path="res://Soil.gd" id="1_wvr4p"]
 [ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://assets/cube_outline.blend" id="2_kdbp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
@@ -14,20 +14,18 @@ size = Vector3(1, 0.1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_flbcm"]
 
-[node name="Patch" type="Node3D" groups=["patch"]]
+[node name="Soil" type="Node3D" groups=["soil"]]
 script = ExtResource("1_wvr4p")
 
-[node name="Soil" type="Node3D" parent="."]
-
-[node name="MeshInstance" type="MeshInstance3D" parent="Soil"]
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_nemoi")
 mesh = SubResource("BoxMesh_mr27g")
 skeleton = NodePath("../..")
 
-[node name="StaticBody" type="StaticBody3D" parent="Soil"]
+[node name="StaticBody" type="StaticBody3D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Soil/StaticBody"]
+[node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
 shape = SubResource("BoxShape3D_r4r3e")
 
 [node name="InteractionArea" type="Area3D" parent="."]

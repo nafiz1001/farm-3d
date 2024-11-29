@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Main.gd" id="1_57p7q"]
 [ext_resource type="Script" path="res://Camera.gd" id="2_mukn0"]
 [ext_resource type="Script" path="res://PlayerCamera.gd" id="2_vt7s2"]
-[ext_resource type="PackedScene" uid="uid://4mliptchk632" path="res://patch.tscn" id="4_30gkc"]
+[ext_resource type="PackedScene" uid="uid://4mliptchk632" path="res://soil.tscn" id="4_30gkc"]
 [ext_resource type="PackedScene" uid="uid://dyguywlqwqnq2" path="res://cabbage.tscn" id="4_86bhu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i5avv"]
@@ -34,7 +34,7 @@ speed = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23041, 4.80688, 0)
 script = ExtResource("2_vt7s2")
 
-[node name="Patch" parent="." instance=ExtResource("4_30gkc")]
+[node name="Soil" parent="." instance=ExtResource("4_30gkc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.05, 2)
 crop_scene = ExtResource("4_86bhu")
 
