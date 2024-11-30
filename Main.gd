@@ -12,6 +12,6 @@ func _on_camera_click(result: Dictionary) -> void:
 	var node = result.collider.get_parent()
 	print("%s!" % node.name)
 	if node.is_in_group("crop"):
-		player.autopilot_on(node)
+		player.autopilot_on(node.soil)
 	elif node.is_in_group("soil"):
-		player.autopilot_on(node.crop)
+		player.autopilot_on(node)
