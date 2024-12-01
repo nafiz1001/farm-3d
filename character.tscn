@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcki8becg4n1p"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_bgl5n"]
+[ext_resource type="Script" path="res://Character.gd" id="1_bgl5n"]
 [ext_resource type="PackedScene" uid="uid://dg70cbjy5077m" path="res://assets/watering_can.blend" id="2_5hwce"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wr7p8"]
@@ -13,7 +13,7 @@ height = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jk7k2"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_bgl5n")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
