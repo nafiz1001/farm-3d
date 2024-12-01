@@ -14,10 +14,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = velocity_direction * speed
 	move_and_slide()
 func _input(event: InputEvent) -> void:
-	get_controller().process(self)
-
-func _on_interaction_area_area_entered(area: Area3D) -> void:
-	pass
+	get_controller().input(self, event)
 
 func move_direction(displacement: Vector3):
 	displacement.y = 0

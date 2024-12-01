@@ -13,5 +13,5 @@ func _input(event):
 func _ready() -> void:
 	look_at(get_parent().global_position)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
