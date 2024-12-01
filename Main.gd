@@ -9,9 +9,10 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_camera_click(result: Dictionary) -> void:
-	var node = result.collider.get_parent()
-	print("%s!" % node.name)
-	if node.is_in_group("crop"):
-		character.autopilot_on(node.soil)
-	elif node.is_in_group("soil"):
-		character.autopilot_on(node)
+	var node: Node = result.collider
+	if node.get_parent():
+		node = node.get_parent()
+	if node.is_in_group("crop") or node.is_in_group("soil"):
+		var area = node.get_interaction_area()
+		area.outline = !area.outline
+		character.interact(node)
