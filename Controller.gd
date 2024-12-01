@@ -1,4 +1,4 @@
-class_name Controller
+class_name Controller extends RefCounted
 
 func ready(character: Character) -> void:
 	pass

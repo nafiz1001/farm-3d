@@ -14,22 +14,18 @@ var crop: Crop:
 			crop.soil = self
 			add_child(crop)
 
-@export var dehydration_time: float = 1
-var hydration: float = 0
+var hydration: SoilHydration = SoilHydration.new()
 
 func _ready() -> void:
 	if crop_:
 		crop = crop_
 func _process(delta: float) -> void:
-	if hydration > 0:
-		hydration -= delta * 1/dehydration_time
-		if hydration <= 0:
-			hydration = 0
+	hydration.process(delta)
 
 func hydrate() -> void:
-	hydration = 1
+	return hydration.hydrate()
 func hydrated():
-	return hydration > 0
+	return hydration.hydrated()
 
 func get_interaction_area() -> Area3D:
 	return $InteractionArea

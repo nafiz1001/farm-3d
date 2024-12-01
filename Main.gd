@@ -14,5 +14,4 @@ func _on_camera_click(result: Dictionary) -> void:
 		node = node.get_parent()
 	if node.is_in_group("crop") or node.is_in_group("soil"):
 		var area = node.get_interaction_area()
-		area.outline = !area.outline
 		character.interact(node)
