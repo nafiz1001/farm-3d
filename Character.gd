@@ -31,9 +31,6 @@ func interact(target):
 	var target_area = target.get_interaction_area()
 	if $InteractionArea.overlaps_area(target_area):
 		target.hydrate()
-		target_area.outline = true
-		await get_tree().create_timer(0.1).timeout
-		target_area.outline = false
 
 func get_controller() -> Controller:
 	return human_controller
