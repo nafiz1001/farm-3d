@@ -9,9 +9,10 @@ var crop: Crop:
 			remove_child(crop)
 		crop_ = value
 		if crop:
-			crop.position = crop.get_meta("position_on_soil")
-			crop.scale = crop.get_meta("scale_on_soil")
-			crop.soil = self
+			crop.position = crop.position_on_soil
+			crop.scale = crop.scale_on_soil
+			crop.container = self
+			hydration.on_hydration.connect(crop.on_hydration)
 			add_child(crop)
 
 var hydration: SoilHydration = SoilHydration.new()
@@ -23,7 +24,7 @@ func _process(delta: float) -> void:
 	hydration.process(delta)
 
 func hydrate() -> void:
-	return hydration.hydrate()
+	hydration.hydrate()
 func hydrated():
 	return hydration.hydrated()
 
