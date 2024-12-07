@@ -23,5 +23,5 @@ func _on_camera_click(result: Dictionary) -> void:
 	else:
 		var soil := preload("res://soil/soil.tscn").instantiate()
 		soil.position = result.position
-		soil.crop = preload("res://cabbage/cabbage.tscn").instantiate()
+		soil.crop = preload("res://cabbage/cabbage_1.tscn").instantiate()
 		root_node.add_child(soil)

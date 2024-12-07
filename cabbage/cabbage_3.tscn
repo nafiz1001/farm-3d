@@ -1,27 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyguywlqwqnq2"]
 
-[ext_resource type="Script" path="res://Crop.gd" id="1_sikj3"]
-[ext_resource type="PackedScene" uid="uid://713pm1ulhqyx" path="res://cabbage/cabbage.blend" id="2_x3toy"]
+[ext_resource type="Script" path="res://Crop.gd" id="1_3mlr6"]
+[ext_resource type="PackedScene" uid="uid://713pm1ulhqyx" path="res://cabbage/cabbage.blend" id="2_oqv3q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lpecp"]
 
 [node name="Cabbage" type="Node3D" groups=["crop"]]
-script = ExtResource("1_sikj3")
+script = ExtResource("1_3mlr6")
+canonical_name = "Cabbage"
 position_on_soil = Vector3(0, 0.25, 0)
 scale_on_soil = Vector3(0.5, 0.5, 0.5)
-canonical_name = "Cabbage"
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 
-[node name="cabbage" parent="StaticBody" instance=ExtResource("2_x3toy")]
+[node name="cabbage" parent="StaticBody" instance=ExtResource("2_oqv3q")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
 shape = SubResource("BoxShape3D_lpecp")
-
-[node name="Label" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-pixel_size = 0.01
-billboard = 1
-text = "Insert Text Here"
-font_size = 20

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlj6qq3816hro"]
+
+[ext_resource type="Script" path="res://Crop.gd" id="1_2d8pr"]
+[ext_resource type="PackedScene" uid="uid://dyguywlqwqnq2" path="res://cabbage/cabbage_3.tscn" id="2_k066p"]
+[ext_resource type="PackedScene" uid="uid://713pm1ulhqyx" path="res://cabbage/cabbage.blend" id="2_lqasw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lpecp"]
+
+[node name="Cabbage" type="Node3D" groups=["crop"]]
+script = ExtResource("1_2d8pr")
+canonical_name = "Cabbage"
+evolution = ExtResource("2_k066p")
+position_on_soil = Vector3(0, 0.125, 0)
+scale_on_soil = Vector3(0.25, 0.25, 0.25)
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+
+[node name="cabbage" parent="StaticBody" instance=ExtResource("2_lqasw")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
+shape = SubResource("BoxShape3D_lpecp")

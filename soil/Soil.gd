@@ -12,7 +12,7 @@ var crop: Crop:
 			crop.position = crop.position_on_soil
 			crop.scale = crop.scale_on_soil
 			crop.container = self
-			hydration.on_hydration.connect(crop.on_hydration)
+			#hydration.on_hydration.connect(crop.on_hydration)
 			crop.on_hydration(hydrated())
 			add_child(crop)
 
