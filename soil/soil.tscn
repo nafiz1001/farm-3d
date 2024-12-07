@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://4mliptchk632"]
 
-[ext_resource type="Script" path="res://Soil.gd" id="1_wvr4p"]
-[ext_resource type="PackedScene" uid="uid://bvybrbgi1ecx2" path="res://interaction_area.tscn" id="2_mi77b"]
+[ext_resource type="Script" path="res://soil/Soil.gd" id="1_wvr4p"]
+[ext_resource type="PackedScene" uid="uid://bvybrbgi1ecx2" path="res://soil/interaction_area.tscn" id="2_mi77b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nemoi"]
 albedo_color = Color(0.572549, 0.407843, 0.160784, 1)

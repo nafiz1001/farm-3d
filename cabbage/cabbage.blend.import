@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dg70cbjy5077m"
-path="res://.godot/imported/watering_can.blend-c7c2b65b78289e101072cb7456e4a0c7.scn"
+uid="uid://713pm1ulhqyx"
+path="res://.godot/imported/cabbage.blend-54805778b6d1294e06e2d2b11cdee787.scn"
 
 [deps]
 
-source_file="res://assets/watering_can.blend"
-dest_files=["res://.godot/imported/watering_can.blend-c7c2b65b78289e101072cb7456e4a0c7.scn"]
+source_file="res://cabbage/cabbage.blend"
+dest_files=["res://.godot/imported/cabbage.blend-54805778b6d1294e06e2d2b11cdee787.scn"]
 
 [params]
 

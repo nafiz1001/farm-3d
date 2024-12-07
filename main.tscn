@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://bp5gbmhqsxtym"]
 
-[ext_resource type="PackedScene" uid="uid://dcki8becg4n1p" path="res://character.tscn" id="1_2x623"]
-[ext_resource type="PackedScene" uid="uid://cishuiua46jp" path="res://assets/house.blend" id="1_8oygb"]
+[ext_resource type="PackedScene" uid="uid://dcki8becg4n1p" path="res://character/character.tscn" id="1_2x623"]
+[ext_resource type="PackedScene" uid="uid://cishuiua46jp" path="res://other/house.blend" id="1_8oygb"]
 [ext_resource type="Script" path="res://Main.gd" id="1_57p7q"]
 [ext_resource type="Script" path="res://Camera.gd" id="2_mukn0"]
 [ext_resource type="Script" path="res://PlayerCamera.gd" id="2_vt7s2"]
 [ext_resource type="Script" path="res://Sun.gd" id="6_bpwjj"]
-[ext_resource type="PackedScene" uid="uid://713pm1ulhqyx" path="res://assets/cabbage.blend" id="7_spvfs"]
-[ext_resource type="PackedScene" uid="uid://u2xunjtiwqow" path="res://assets/tomato.blend" id="8_8whvj"]
-[ext_resource type="PackedScene" uid="uid://bsa3hulyxolj" path="res://assets/carrot.blend" id="9_puo8s"]
+[ext_resource type="PackedScene" uid="uid://713pm1ulhqyx" path="res://cabbage/cabbage.blend" id="7_spvfs"]
+[ext_resource type="PackedScene" uid="uid://u2xunjtiwqow" path="res://tomato/tomato.blend" id="8_8whvj"]
+[ext_resource type="PackedScene" uid="uid://bsa3hulyxolj" path="res://carrot/carrot.blend" id="9_puo8s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i5avv"]
 size = Vector3(25, 1, 25)

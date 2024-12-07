@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcki8becg4n1p"]
 
-[ext_resource type="Script" path="res://Character.gd" id="1_bgl5n"]
-[ext_resource type="PackedScene" uid="uid://dg70cbjy5077m" path="res://assets/watering_can.blend" id="2_5hwce"]
+[ext_resource type="Script" path="res://character/Character.gd" id="1_bgl5n"]
+[ext_resource type="PackedScene" uid="uid://dg70cbjy5077m" path="res://other/watering_can.blend" id="2_5hwce"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wr7p8"]
 radius = 0.25
@@ -26,7 +26,7 @@ mesh = SubResource("CapsuleMesh_3jyug")
 skeleton = NodePath("../..")
 
 [node name="Watering Can" parent="Pivot" instance=ExtResource("2_5hwce")]
-transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0, 0.515)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0.425)
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

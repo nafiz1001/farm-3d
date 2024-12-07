@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ch32jm4yvyyfv"
-path.s3tc="res://.godot/imported/tomato_normal.png-338763421ea6c1b932d609c73e8bd521.s3tc.ctex"
+path.s3tc="res://.godot/imported/tomato_normal.png-45fb0a5a68c61404c5cafd7aa6c2d675.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/tomato_normal.png"
-dest_files=["res://.godot/imported/tomato_normal.png-338763421ea6c1b932d609c73e8bd521.s3tc.ctex"]
+source_file="res://tomato/tomato_normal.png"
+dest_files=["res://.godot/imported/tomato_normal.png-45fb0a5a68c61404c5cafd7aa6c2d675.s3tc.ctex"]
 
 [params]
 

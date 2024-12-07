@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://u2xunjtiwqow"
-path="res://.godot/imported/tomato.blend-c753b930fbe940f82645a65d75b4b845.scn"
+path="res://.godot/imported/tomato.blend-b2d1f16a6b349d080be38dcf6e5e61da.scn"
 
 [deps]
 
-source_file="res://assets/tomato.blend"
-dest_files=["res://.godot/imported/tomato.blend-c753b930fbe940f82645a65d75b4b845.scn"]
+source_file="res://tomato/tomato.blend"
+dest_files=["res://.godot/imported/tomato.blend-b2d1f16a6b349d080be38dcf6e5e61da.scn"]
 
 [params]
 

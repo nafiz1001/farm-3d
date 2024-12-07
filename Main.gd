@@ -21,7 +21,7 @@ func _on_camera_click(result: Dictionary) -> void:
 		await get_tree().create_timer(0.1).timeout
 		target_area.outline = false
 	else:
-		var soil := preload("res://soil.tscn").instantiate()
+		var soil := preload("res://soil/soil.tscn").instantiate()
 		soil.position = result.position
-		soil.crop = preload("res://cabbage.tscn").instantiate()
+		soil.crop = preload("res://cabbage/cabbage.tscn").instantiate()
 		root_node.add_child(soil)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvybrbgi1ecx2"]
 
-[ext_resource type="Script" path="res://InteractionArea.gd" id="1_3crli"]
-[ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://assets/cube_outline.blend" id="1_xwmgt"]
+[ext_resource type="Script" path="res://soil/InteractionArea.gd" id="1_3crli"]
+[ext_resource type="PackedScene" uid="uid://bts02ofx3svi" path="res://other/cube_outline.blend" id="1_xwmgt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_flbcm"]
 

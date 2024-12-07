@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bts02ofx3svi"
-path="res://.godot/imported/cube_outline.blend-b713efed70bd7c76232e66a89e9f03c9.scn"
+uid="uid://bsa3hulyxolj"
+path="res://.godot/imported/carrot.blend-9356fd54a457cc0d688365244b281d7d.scn"
 
 [deps]
 
-source_file="res://assets/cube_outline.blend"
-dest_files=["res://.godot/imported/cube_outline.blend-b713efed70bd7c76232e66a89e9f03c9.scn"]
+source_file="res://carrot/carrot.blend"
+dest_files=["res://.godot/imported/carrot.blend-9356fd54a457cc0d688365244b281d7d.scn"]
 
 [params]
 
